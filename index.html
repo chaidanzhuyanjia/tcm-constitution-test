@@ -1,0 +1,107 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>九型中医体质人格测试</title>
+    <meta
+      name="description"
+      content="类似 MBTI 的九种中医体质人格测试，完成后解锁专属角色、复合体质结果与生活建议。"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">TCM Archetype Test</p>
+          <h1>九型中医体质人格测试</h1>
+        </div>
+        <button id="resetBtn" class="ghost-btn" type="button">重新开始</button>
+      </header>
+
+      <main class="workspace">
+        <aside class="insight-panel" aria-label="测试概览">
+          <div class="image-wrap">
+            <img id="heroImage" src="" alt="中医体质测试视觉" />
+          </div>
+          <div class="panel-body">
+            <div class="metric-row">
+              <span>答题进度</span>
+              <strong><span id="answeredCount">0</span>/45</strong>
+            </div>
+            <div class="progress-track" aria-label="答题进度">
+              <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <p id="sidebarNote" class="sidebar-note">
+              角色档案将在完成测试后解锁。答题阶段不会显示题目对应的体质维度。
+            </p>
+            <div class="constitution-map locked" id="constitutionMap"></div>
+          </div>
+        </aside>
+
+        <section class="test-panel" id="testPanel" aria-live="polite">
+          <div class="persona-picker" aria-label="选择最终角色形象">
+            <span>角色形象</span>
+            <div class="segmented-control" id="genderOptions">
+              <button type="button" data-gender="female" aria-pressed="true">女性形象</button>
+              <button type="button" data-gender="male" aria-pressed="false">男性形象</button>
+            </div>
+          </div>
+
+          <div class="question-meta">
+            <span id="questionNumber">第 1 题 / 45</span>
+            <span>生活状态自评</span>
+          </div>
+
+          <div class="question-stage">
+            <h2 id="questionText"></h2>
+            <p id="questionHint" class="question-hint"></p>
+            <div class="scale" id="scaleOptions" role="radiogroup" aria-label="选择符合程度"></div>
+          </div>
+
+          <div class="nav-row">
+            <button id="prevBtn" class="secondary-btn" type="button">上一题</button>
+            <button id="nextBtn" class="primary-btn" type="button">下一题</button>
+          </div>
+        </section>
+
+        <section class="result-panel hidden" id="resultPanel" aria-live="polite">
+          <div class="result-heading">
+            <p class="eyebrow">Your Constitution Archetype</p>
+            <h2 id="resultTitle"></h2>
+            <p id="resultSummary"></p>
+          </div>
+
+          <div class="hero-result">
+            <div class="result-character">
+              <img id="primaryCharacterImage" src="" alt="" />
+            </div>
+            <div class="primary-result">
+              <div class="code-badge" id="resultCode"></div>
+              <p class="archetype-name" id="primaryArchetype"></p>
+              <h3 id="primaryLabel"></h3>
+              <p id="primaryDescription"></p>
+            </div>
+          </div>
+
+          <div class="score-list" id="scoreList"></div>
+          <div class="advice-grid" id="adviceGrid"></div>
+
+          <div class="result-actions">
+            <button id="copyBtn" class="primary-btn" type="button">复制结果摘要</button>
+          </div>
+
+          <p class="disclaimer">
+            测试结果与角色形象已锁定，不能返回修改答案。重新开始会清空本次作答并生成一次新的测试结果。本测试用于健康管理自我观察，不构成诊断、处方或治疗建议；若有持续不适、慢性疾病、妊娠或正在用药，请咨询执业医师。
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="assets-inline.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
