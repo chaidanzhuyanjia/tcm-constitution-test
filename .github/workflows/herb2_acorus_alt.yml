@@ -1,0 +1,24 @@
+name: HERB2 Acorus sensitivity
+on:
+  push:
+    branches: [herb2-cp-extractor]
+    paths:
+      - 'herb2_acorus_alt.py'
+      - '.github/workflows/herb2_acorus_alt.yml'
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python herb2_acorus_alt.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: herb2-acorus-alt
+          path: herb2_acorus_alt
+          retention-days: 7
