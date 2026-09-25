@@ -1,0 +1,22 @@
+name: UniProt H7COS8 lookup
+on:
+  push:
+    branches: [herb2-cp-extractor]
+    paths:
+      - 'lookup_h7cos8.py'
+      - '.github/workflows/lookup_h7cos8.yml'
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python lookup_h7cos8.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h7cos8-lookup
+          path: uniprot_lookup
+          retention-days: 7
