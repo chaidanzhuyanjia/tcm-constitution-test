@@ -1,0 +1,21 @@
+name: PPI diagnostic
+on:
+  push:
+    branches: [herb2-cp-extractor]
+    paths: ['ppi_diagnostic.py','.github/workflows/ppi_diagnostic.yml']
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install pandas networkx requests
+      - run: python ppi_diagnostic.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ppi-diagnostic
+          path: ppi_diag
+          retention-days: 7
