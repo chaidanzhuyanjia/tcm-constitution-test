@@ -1,0 +1,24 @@
+name: HERB2 CP extraction
+on:
+  push:
+    branches: [herb2-cp-extractor]
+    paths:
+      - 'herb2_cp_extract.py'
+      - '.github/workflows/herb2_cp_extract.yml'
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python herb2_cp_extract.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: herb2-cp-output
+          path: herb2_output
+          retention-days: 7
