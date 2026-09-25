@@ -1,0 +1,22 @@
+name: Recover D2 Figure3
+on:
+  push:
+    branches: [herb2-cp-extractor]
+    paths:
+      - 'recover_d2_fig3.py'
+      - '.github/workflows/recover_d2_fig3.yml'
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pymupdf
+      - run: python recover_d2_fig3.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d2-figure3-recovery
+          path: d2_recovery
+          retention-days: 7
